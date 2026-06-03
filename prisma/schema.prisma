@@ -1,0 +1,69 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Quote {
+  id          String    @id @default(uuid())
+  content     String
+  author      String
+  category    String    // Success, Leadership, Business, Entrepreneurship, Education, Love, Faith, Discipline, Growth, Productivity, Confidence, Sports, Life Lessons, Relationships, Happiness
+  mood        String?   // Happy, Sad, Stressed, Motivated, Tired, Confused
+  tags        String?   // comma-separated tags
+  isPopular   Boolean   @default(false)
+  isTrending  Boolean   @default(false)
+  authorBio   String?
+  createdAt   DateTime  @default(now())
+  likes       Like[]
+  comments    Comment[]
+}
+
+model UserProgress {
+  id             String   @id @default(uuid())
+  userId         String   @unique
+  streakCount    Int      @default(0)
+  lastActive     DateTime @default(now())
+  interests      String   @default("[]") // JSON string list of category strings
+  unlockedBadges String   @default("[]") // JSON string list of badge strings
+  createdAt      DateTime @default(now())
+}
+
+model Collection {
+  id        String   @id @default(uuid())
+  name      String
+  userId    String
+  quotes    String   @default("[]") // JSON string list of quote IDs
+  createdAt DateTime @default(now())
+}
+
+model VisionBoard {
+  id              String   @id @default(uuid())
+  userId          String   @unique
+  title           String   @default("My Vision Board")
+  goals           String   @default("[]") // JSON string list of goals/milestones with coordinates
+  quotes          String   @default("[]") // JSON string list of quotes/positions
+  backgroundImage String?
+  createdAt       DateTime @default(now())
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  quoteId   String
+  userId    String
+  username  String
+  content   String
+  createdAt DateTime @default(now())
+  quote     Quote    @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+}
+
+model Like {
+  id        String   @id @default(uuid())
+  quoteId   String
+  userId    String
+  createdAt DateTime @default(now())
+  quote     Quote    @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+}
