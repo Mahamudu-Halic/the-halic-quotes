@@ -3,8 +3,7 @@
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Send, CheckCircle2, MessageSquare, Mail, MapPin } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { MessageSquare, Mail, MapPin } from 'lucide-react';
 
 export default function ContactPage() {
   const [name, setName] = useState('');
@@ -12,23 +11,23 @@ export default function ContactPage() {
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name || !email || !message) return;
-    setSubmitted(true);
-    setName('');
-    setEmail('');
-    setMessage('');
-    setTimeout(() => setSubmitted(false), 5000);
-  };
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (!name || !email || !message) return;
+  //   setSubmitted(true);
+  //   setName('');
+  //   setEmail('');
+  //   setMessage('');
+  //   setTimeout(() => setSubmitted(false), 5000);
+  // };
 
   return (
     <>
       <Navbar />
-      
-      <main className="flex-grow hero-gradient py-16 px-4">
+
+      <main className="grow hero-gradient py-16 px-4">
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-          
+
           {/* Info Column */}
           <div className="md:col-span-1 flex flex-col gap-6">
             <div>
@@ -47,17 +46,23 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <span className="font-bold text-slate-700 dark:text-slate-300 block">Email Us</span>
-                  <span className="text-slate-500">support@halicquotes.com</span>
+                  <a href="mailto:mahamuduhalic.official@gmail.com" target="_blank" rel="noopener noreferrer"
+                    className="text-slate-500 hover:text-purple-600 dark:hover:text-purple-400 underline">
+                    mahamuduhalic.official@gmail.com
+                  </a>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-purple-500/10 text-purple-600 dark:text-purple-400 rounded-lg">
                   <MessageSquare className="w-4 h-4" />
                 </div>
                 <div>
                   <span className="font-bold text-slate-700 dark:text-slate-300 block">Community Discord</span>
-                  <span className="text-slate-500">discord.gg/halicquotes</span>
+                  <a href="https://discord.gg/m3zhsZaW" target="_blank" rel="noopener noreferrer"
+                    className="text-slate-500 hover:text-purple-600 dark:hover:text-purple-400 underline">
+                    discord.gg/m3zhsZaW
+                  </a>
                 </div>
               </div>
 
@@ -74,7 +79,7 @@ export default function ContactPage() {
           </div>
 
           {/* Form Column */}
-          <div className="md:col-span-2">
+          {/* <div className="md:col-span-2">
             <div className="glass-card p-8">
               {submitted ? (
                 <div className="flex flex-col items-center justify-center py-10 gap-3 text-center">
@@ -133,7 +138,7 @@ export default function ContactPage() {
                 </form>
               )}
             </div>
-          </div>
+          </div> */}
 
         </div>
       </main>
