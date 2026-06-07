@@ -41,14 +41,14 @@ export const Navbar: React.FC = () => {
     <nav className="sticky top-0 z-40 w-full border-b border-slate-200/50 dark:border-slate-800/40 bg-white/75 dark:bg-slate-950/75 backdrop-blur-md transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          
+
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
+          <div className="shrink-0 flex items-center">
             <Link href="/" className="flex items-center gap-2 group">
-              <span className="w-8 h-8 rounded-lg bg-gradient-to-tr from-purple-600 to-amber-500 flex items-center justify-center text-white font-extrabold shadow-md shadow-purple-500/20 group-hover:scale-105 transition-transform duration-200">
+              <span className="w-8 h-8 rounded-lg bg-linear-to-tr from-purple-600 to-amber-500 flex items-center justify-center text-white font-extrabold shadow-md shadow-purple-500/20 group-hover:scale-105 transition-transform duration-200">
                 Q
               </span>
-              <span className="text-xl font-bold font-display tracking-tight bg-gradient-to-r from-purple-600 via-violet-500 to-amber-500 bg-clip-text text-transparent group-hover:opacity-90">
+              <span className="text-xl font-bold font-display tracking-tight bg-linear-to-r from-purple-600 via-violet-500 to-amber-500 bg-clip-text text-transparent group-hover:opacity-90">
                 TheHalicQuotes
               </span>
             </Link>
@@ -63,11 +63,10 @@ export const Navbar: React.FC = () => {
                 <Link
                   key={link.path}
                   href={link.path}
-                  className={`px-3 py-2 rounded-xl text-sm font-medium transition-all flex items-center gap-1.5 ${
-                    isActive
+                  className={`px-3 py-2 rounded-xl text-sm font-medium transition-all flex items-center gap-1.5 ${isActive
                       ? 'bg-purple-500/10 text-purple-600 dark:text-purple-400 font-semibold'
                       : 'text-slate-600 hover:text-purple-600 dark:text-slate-300 dark:hover:text-purple-400 hover:bg-slate-50 dark:hover:bg-slate-900/50'
-                  }`}
+                    }`}
                 >
                   {Icon && <Icon className="w-4 h-4 text-purple-500" />}
                   {link.name}
@@ -83,10 +82,10 @@ export const Navbar: React.FC = () => {
 
           {/* Action buttons / User tools */}
           <div className="hidden md:flex items-center space-x-4">
-            
+
             {/* Streak indicator */}
             {user && user.role !== 'GUEST' && (
-              <Link 
+              <Link
                 href="/dashboard"
                 className="flex items-center gap-1 bg-amber-500/10 text-amber-600 dark:text-amber-400 px-2.5 py-1.5 rounded-xl text-sm font-semibold hover:scale-105 transition-all shadow-sm"
                 title="Your Motivation Streak"
@@ -157,11 +156,10 @@ export const Navbar: React.FC = () => {
               key={link.path}
               href={link.path}
               onClick={() => setMobileMenuOpen(false)}
-              className={`block px-3 py-2.5 rounded-xl text-base font-medium transition-colors ${
-                pathname === link.path
+              className={`block px-3 py-2.5 rounded-xl text-base font-medium transition-colors ${pathname === link.path
                   ? 'bg-purple-500/10 text-purple-600 dark:text-purple-400'
                   : 'text-slate-600 hover:text-purple-600 dark:text-slate-300 dark:hover:text-purple-400'
-              }`}
+                }`}
             >
               <div className="flex items-center justify-between">
                 <span>{link.name}</span>

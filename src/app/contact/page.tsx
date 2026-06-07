@@ -1,8 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import { useState } from 'react';
 import { MessageSquare, Mail, MapPin } from 'lucide-react';
 
 export default function ContactPage() {
@@ -22,9 +20,7 @@ export default function ContactPage() {
   // };
 
   return (
-    <>
-      <Navbar />
-
+   
       <main className="grow hero-gradient py-16 px-4">
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
 
@@ -143,7 +139,5 @@ export default function ContactPage() {
         </div>
       </main>
 
-      <Footer />
-    </>
   );
 }

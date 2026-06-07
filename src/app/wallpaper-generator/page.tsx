@@ -1,12 +1,10 @@
 'use client';
 
-import React, { useEffect, useRef, useState, Suspense } from 'react';
+import { useEffect, useRef, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { 
-  Download, Palette, Type, RefreshCw, 
-  Sparkles, Check, CheckCircle2, ChevronRight 
+import {
+  Download, RefreshCw,
+  Check,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -32,7 +30,7 @@ const FONTS = ['Poppins', 'Georgia', 'Arial', 'Courier New'];
 export default function WallpaperGeneratorPage() {
   return (
     <Suspense fallback={
-      <div className="flex-grow flex flex-col items-center justify-center py-40 gap-3">
+      <div className="grow flex flex-col items-center justify-center py-40 gap-3">
         <RefreshCw className="w-8 h-8 text-purple-600 animate-spin" />
         <span className="text-xs text-slate-500 font-medium font-sans">Initializing Canvas Layout...</span>
       </div>
@@ -94,7 +92,7 @@ function WallpaperGeneratorContent() {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = selectedTheme.text;
-    
+
     // Scale font size relative to dimensions if needed, but respect font selection
     ctx.font = `italic 600 ${fontSize}px ${selectedFont}`;
 
@@ -159,11 +157,11 @@ function WallpaperGeneratorContent() {
   };
 
   return (
-    <>
-      <Navbar />
-      
-      <main className="flex-grow hero-gradient py-12 px-4 max-w-7xl mx-auto w-full text-center">
-        
+
+    <main className="grow hero-gradient py-12 px-4 w-full text-center">
+
+      <div className='max-w-7xl mx-auto w-full'>
+
         {/* Header */}
         <section className="mb-10 max-w-3xl mx-auto text-center">
           <motion.div
@@ -181,19 +179,19 @@ function WallpaperGeneratorContent() {
 
         {/* Customizer Layout */}
         <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-          
+
           {/* 1. Preview Panel */}
           <div className="lg:col-span-2 flex flex-col gap-4 items-center">
             <div className="w-full max-w-[500px] border border-slate-200/50 dark:border-slate-800/40 rounded-2xl overflow-hidden shadow-2xl bg-slate-950/20 backdrop-blur-md p-4">
               <span className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold block mb-2">Live Canvas Preview</span>
               <div className="flex justify-center items-center w-full aspect-square bg-slate-900/10 dark:bg-slate-900/40 rounded-xl overflow-hidden relative border border-slate-200/20">
-                <canvas 
-                  ref={canvasRef} 
+                <canvas
+                  ref={canvasRef}
                   className="max-w-full max-h-full object-contain rounded-lg shadow-md"
                 />
               </div>
             </div>
-            
+
             <button
               onClick={handleDownload}
               className="w-full max-w-[500px] bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
@@ -206,7 +204,7 @@ function WallpaperGeneratorContent() {
 
           {/* 2. Control Customizer Panel */}
           <div className="lg:col-span-1 glass-card p-6 flex flex-col gap-6 text-left">
-            
+
             {/* Quote Inputs */}
             <div className="flex flex-col gap-3">
               <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">Quote Editor</h3>
@@ -246,11 +244,10 @@ function WallpaperGeneratorContent() {
                         setFontSize(44);
                       }
                     }}
-                    className={`px-3 py-2.5 rounded-xl text-xs font-medium text-left border flex justify-between items-center transition-colors cursor-pointer ${
-                      selectedFormat.name === f.name
-                        ? 'border-purple-600 bg-purple-500/10 text-purple-600 dark:text-purple-400 font-semibold'
-                        : 'border-slate-200/50 dark:border-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-900/50'
-                    }`}
+                    className={`px-3 py-2.5 rounded-xl text-xs font-medium text-left border flex justify-between items-center transition-colors cursor-pointer ${selectedFormat.name === f.name
+                      ? 'border-purple-600 bg-purple-500/10 text-purple-600 dark:text-purple-400 font-semibold'
+                      : 'border-slate-200/50 dark:border-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-900/50'
+                      }`}
                   >
                     <span>{f.name}</span>
                     <span className="text-[10px] text-slate-400 font-bold font-sans">{f.aspect}</span>
@@ -269,13 +266,12 @@ function WallpaperGeneratorContent() {
                     <button
                       key={theme.name}
                       onClick={() => setSelectedTheme(theme)}
-                      className={`h-11 rounded-xl bg-gradient-to-br flex items-center justify-center text-white border transition-all ${
-                        active 
-                          ? 'border-purple-600 scale-105 shadow-md shadow-purple-500/20' 
-                          : 'border-slate-200/40 dark:border-slate-800/40 hover:scale-[1.02]'
-                      }`}
-                      style={{ 
-                        backgroundImage: `linear-gradient(135deg, ${theme.colors[0]}, ${theme.colors[1]})` 
+                      className={`h-11 rounded-xl bg-linear-to-br flex items-center justify-center text-white border transition-all ${active
+                        ? 'border-purple-600 scale-105 shadow-md shadow-purple-500/20'
+                        : 'border-slate-200/40 dark:border-slate-800/40 hover:scale-[1.02]'
+                        }`}
+                      style={{
+                        backgroundImage: `linear-gradient(135deg, ${theme.colors[0]}, ${theme.colors[1]})`
                       }}
                       title={theme.name}
                     >
@@ -294,11 +290,10 @@ function WallpaperGeneratorContent() {
                   <button
                     key={font}
                     onClick={() => setSelectedFont(font)}
-                    className={`px-2 py-2 border text-xs rounded-xl transition-all cursor-pointer ${
-                      selectedFont === font
-                        ? 'border-purple-600 bg-purple-500/10 text-purple-600 dark:text-purple-400 font-semibold'
-                        : 'border-slate-200/60 dark:border-slate-800/60 hover:bg-slate-50 dark:hover:bg-slate-900/50'
-                    }`}
+                    className={`px-2 py-2 border text-xs rounded-xl transition-all cursor-pointer ${selectedFont === font
+                      ? 'border-purple-600 bg-purple-500/10 text-purple-600 dark:text-purple-400 font-semibold'
+                      : 'border-slate-200/60 dark:border-slate-800/60 hover:bg-slate-50 dark:hover:bg-slate-900/50'
+                      }`}
                     style={{ fontFamily: font }}
                   >
                     {font}
@@ -325,10 +320,9 @@ function WallpaperGeneratorContent() {
 
           </div>
         </section>
+      </div>
+    </main>
 
-      </main>
 
-      <Footer />
-    </>
   );
 }

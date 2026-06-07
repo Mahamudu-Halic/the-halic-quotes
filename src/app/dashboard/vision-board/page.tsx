@@ -1,12 +1,10 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { useAuth } from '@/context/AuthContext';
-import { 
-  Plus, Sparkles, Save, Trash2, CheckCircle2, RefreshCw, 
-  Map, Quote as QuoteIcon, CheckSquare, Target, Compass
+import {
+  Plus, Save, Trash2, CheckCircle2, RefreshCw,
+  Quote as QuoteIcon, Target, Compass
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -27,7 +25,7 @@ interface BoardQuote {
 
 export default function VisionBoardPage() {
   const { user } = useAuth();
-  
+
   // Canvas State
   const [title, setTitle] = useState('My Vision Board');
   const [goals, setGoals] = useState<BoardGoal[]>([]);
@@ -174,29 +172,27 @@ export default function VisionBoardPage() {
 
   if (!user) {
     return (
-      <>
-        <Navbar />
-        <main className="flex-grow flex items-center justify-center py-20 hero-gradient">
-          <div className="glass-card p-8 max-w-sm text-center">
-            <Target className="w-12 h-12 text-slate-400 mx-auto mb-4" />
-            <h2 className="font-bold text-lg text-slate-800 dark:text-slate-200">Access Restricted</h2>
-            <p className="text-xs text-slate-500 mt-2 mb-4">Please toggle to a User role in the selector bottom-left to explore vision boards.</p>
-          </div>
-        </main>
-        <Footer />
-      </>
+
+      <main className="grow flex items-center justify-center py-20 hero-gradient">
+        <div className="glass-card p-8 max-w-sm text-center">
+          <Target className="w-12 h-12 text-slate-400 mx-auto mb-4" />
+          <h2 className="font-bold text-lg text-slate-800 dark:text-slate-200">Access Restricted</h2>
+          <p className="text-xs text-slate-500 mt-2 mb-4">Please toggle to a User role in the selector bottom-left to explore vision boards.</p>
+        </div>
+      </main>
+
     );
   }
 
   return (
-    <>
-      <Navbar />
-      
-      <main className="flex-grow hero-gradient py-12 px-4 max-w-7xl mx-auto w-full text-center">
-        
+
+
+    <main className="grow hero-gradient py-12 px-4 w-full text-center">
+      <div className='max-w-7xl mx-auto w-full'>
+
         {/* Header toolbar */}
         <section className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white/20 dark:bg-slate-900/10 p-6 rounded-2xl border border-white/10 mb-8 text-left">
-          <div className="flex-grow">
+          <div className="grow">
             <input
               type="text"
               value={title}
@@ -226,14 +222,14 @@ export default function VisionBoardPage() {
 
         {/* Vision Board Grid customizer */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
-          
+
           {/* Controls: Forms to add items */}
           <div className="lg:col-span-1 flex flex-col gap-6 text-left">
-            
+
             {/* Save Success Alert */}
             <AnimatePresence>
               {saveSuccess && (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
@@ -306,7 +302,7 @@ export default function VisionBoardPage() {
           {/* Canvas Drag Area */}
           <div className="lg:col-span-3">
             <div className="w-full h-[520px] bg-slate-50 dark:bg-slate-900/30 rounded-2xl border border-slate-200/50 dark:border-slate-800/40 relative bg-grid-pattern shadow-inner overflow-hidden">
-              
+
               {loading ? (
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
                   <RefreshCw className="w-8 h-8 text-purple-600 animate-spin" />
@@ -331,11 +327,11 @@ export default function VisionBoardPage() {
                     >
                       <div className="flex justify-between items-start gap-2 text-left">
                         <label className="flex gap-2 items-start text-xs font-semibold cursor-pointer">
-                          <input 
+                          <input
                             type="checkbox"
                             checked={g.checked}
                             onChange={() => handleToggleGoalCheck(g.id)}
-                            className="mt-0.5 rounded cursor-pointer h-3.5 w-3.5 accent-purple-600" 
+                            className="mt-0.5 rounded cursor-pointer h-3.5 w-3.5 accent-purple-600"
                           />
                           <span className={`leading-normal ${g.checked ? 'line-through text-slate-400' : 'text-slate-800 dark:text-slate-200'}`}>{g.text}</span>
                         </label>
@@ -357,7 +353,7 @@ export default function VisionBoardPage() {
                       onDragStart={() => handleDragStart(q.id, 'quote')}
                       onDragEnd={(e) => handleDragEnd(e, q.id)}
                       style={{ left: q.x, top: q.y }}
-                      className="absolute w-56 bg-gradient-to-tr from-purple-600/10 to-indigo-600/10 dark:from-purple-950/20 dark:to-indigo-950/20 p-4 rounded-xl border border-purple-500/20 dark:border-purple-500/10 shadow-md cursor-grab active:cursor-grabbing hover:border-purple-500/40 group text-left"
+                      className="absolute w-56 bg-linear-to-tr from-purple-600/10 to-indigo-600/10 dark:from-purple-950/20 dark:to-indigo-950/20 p-4 rounded-xl border border-purple-500/20 dark:border-purple-500/10 shadow-md cursor-grab active:cursor-grabbing hover:border-purple-500/40 group text-left"
                     >
                       <div className="flex justify-between items-start gap-2">
                         <p className="text-xs italic leading-relaxed text-slate-700 dark:text-slate-300 font-display">
@@ -379,9 +375,9 @@ export default function VisionBoardPage() {
           </div>
 
         </div>
-      </main>
+      </div>
+    </main>
 
-      <Footer />
-    </>
+
   );
 }

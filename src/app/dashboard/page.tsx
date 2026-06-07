@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { useAuth } from '@/context/AuthContext';
 import { 
   Flame, Award, FolderPlus, Folder, Trash2, Heart, Copy, 
@@ -178,25 +176,21 @@ export default function DashboardPage() {
 
   if (!user) {
     return (
-      <>
-        <Navbar />
-        <main className="flex-grow flex items-center justify-center py-20 hero-gradient">
+     
+        <main className="grow flex items-center justify-center py-20 hero-gradient">
           <div className="glass-card p-8 max-w-sm text-center">
             <UserIcon className="w-12 h-12 text-slate-400 mx-auto mb-4" />
             <h2 className="font-bold text-lg text-slate-800 dark:text-slate-200">Access Restricted</h2>
             <p className="text-xs text-slate-500 mt-2 mb-4">Please toggle to a User role in the selector bottom-left to explore the dashboard.</p>
           </div>
         </main>
-        <Footer />
-      </>
+       
     );
   }
 
   return (
-    <>
-      <Navbar />
-      
-      <main className="flex-grow hero-gradient py-12 px-4">
+    
+      <main className="grow hero-gradient py-12 px-4">
         <div className="max-w-6xl mx-auto flex flex-col gap-8 text-left">
           
           {/* Header block */}
@@ -291,7 +285,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Tab Panes */}
-          <div className="min-h-[300px]">
+          <div className="min-h-75">
             {loading ? (
               <div className="flex flex-col items-center justify-center py-20 gap-3">
                 <RefreshCw className="w-8 h-8 text-purple-600 animate-spin" />
@@ -322,7 +316,7 @@ export default function DashboardPage() {
                               <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${badge.color} shrink-0`}>
                                 <badge.icon className="w-5 h-5" />
                               </div>
-                              <div className="flex-grow text-left">
+                              <div className="grow text-left">
                                 <div className="flex items-center justify-between">
                                   <span className="text-xs font-bold text-slate-800 dark:text-slate-200">{badge.name}</span>
                                   {isUnlocked ? (
@@ -395,7 +389,7 @@ export default function DashboardPage() {
                             placeholder="Collection Name (e.g. Daily Business)"
                             value={newCollectionName}
                             onChange={(e) => setNewCollectionName(e.target.value)}
-                            className="flex-grow bg-white dark:bg-slate-950 px-3 py-2 text-xs rounded-lg border border-slate-200 dark:border-slate-800 outline-none"
+                            className="grow bg-white dark:bg-slate-950 px-3 py-2 text-xs rounded-lg border border-slate-200 dark:border-slate-800 outline-none"
                           />
                           <button
                             type="submit"
@@ -525,7 +519,5 @@ export default function DashboardPage() {
         </div>
       </main>
 
-      <Footer />
-    </>
   );
 }

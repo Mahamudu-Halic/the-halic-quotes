@@ -2,10 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { 
-  Trophy, Shield, Briefcase, Rocket, BookOpen, Heart, Flame, Compass, 
+import {
+  Trophy, Shield, Briefcase, Rocket, BookOpen, Heart, Flame, Compass,
   Activity, Star, Smile, Award, Users, GraduationCap, Clock
 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -30,11 +28,10 @@ const CATEGORIES = [
 
 export default function CategoriesPage() {
   return (
-    <>
-      <Navbar />
-      
-      <main className="flex-grow hero-gradient py-16 px-4 max-w-7xl mx-auto w-full text-center">
-        
+
+    <main className="grow hero-gradient py-16 px-4 w-full text-center">
+      <div className='max-w-7xl mx-auto w-full'>
+
         {/* Header */}
         <section className="mb-12 max-w-3xl mx-auto">
           <motion.div
@@ -65,10 +62,10 @@ export default function CategoriesPage() {
                 className="glass-card p-6 flex flex-col justify-between text-left relative overflow-hidden group min-h-[200px]"
               >
                 {/* Background glow gradient */}
-                <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${cat.color} opacity-5 group-hover:opacity-10 rounded-bl-full transition-all duration-300`} />
-                
+                <div className={`absolute top-0 right-0 w-24 h-24 bg-linear-to-br ${cat.color} opacity-5 group-hover:opacity-10 rounded-bl-full transition-all duration-300`} />
+
                 <div>
-                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${cat.color} text-white flex items-center justify-center shadow-lg`}>
+                  <div className={`w-10 h-10 rounded-xl bg-linear-to-br ${cat.color} text-white flex items-center justify-center shadow-lg`}>
                     <Icon className="w-5 h-5" />
                   </div>
                   <h2 className="text-lg font-bold font-display text-slate-900 dark:text-slate-100 mt-4 mb-2">
@@ -80,7 +77,7 @@ export default function CategoriesPage() {
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-slate-200/50 dark:border-slate-800/40">
-                  <Link 
+                  <Link
                     href={`/?category=${cat.name}`}
                     className="text-xs font-semibold text-purple-600 dark:text-purple-400 hover:opacity-80 flex items-center gap-1"
                   >
@@ -92,10 +89,7 @@ export default function CategoriesPage() {
             );
           })}
         </section>
-
-      </main>
-
-      <Footer />
-    </>
+      </div>
+    </main>
   );
 }

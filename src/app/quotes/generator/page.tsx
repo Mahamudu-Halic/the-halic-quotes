@@ -1,12 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { useAuth } from '@/context/AuthContext';
-import { 
-  Sparkles, Copy, Download, Heart, RefreshCw, CheckCircle2, 
-  MessageSquare, Compass, Eye, Share2, Layers, Repeat 
+import {
+  Sparkles, Copy, Download, Heart, RefreshCw, CheckCircle2,
+  Compass, Repeat
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
@@ -23,7 +21,7 @@ const REWRITE_STYLES = ['Inspirational', 'Professional', 'Funny', 'Gen-Z', 'Busi
 
 export default function QuoteGeneratorPage() {
   const { user } = useAuth();
-  
+
   // Input parameters
   const [topic, setTopic] = useState(TOPICS[0]);
   const [mood, setMood] = useState(MOODS[0]);
@@ -124,11 +122,9 @@ export default function QuoteGeneratorPage() {
   };
 
   return (
-    <>
-      <Navbar />
-      
-      <main className="flex-grow hero-gradient py-12 px-4 max-w-7xl mx-auto w-full text-center">
-        
+    <main className="grow hero-gradient py-12 px-4 w-full text-center">
+
+      <div className='max-w-7xl mx-auto w-full'>
         {/* Title */}
         <section className="mb-10 max-w-3xl mx-auto text-center">
           <motion.div
@@ -145,7 +141,7 @@ export default function QuoteGeneratorPage() {
         </section>
 
         <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start text-left">
-          
+
           {/* Inputs Column */}
           <div className="lg:col-span-1 glass-card p-6">
             <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-1.5">
@@ -213,14 +209,14 @@ export default function QuoteGeneratorPage() {
 
           {/* Output Card Column */}
           <div className="lg:col-span-2 flex flex-col gap-6">
-            
+
             {/* Card Result Display */}
-            <div className="glass-card p-8 min-h-[220px] flex flex-col justify-between relative overflow-hidden bg-gradient-to-tr from-purple-500/5 to-indigo-500/5 dark:from-purple-950/10 dark:to-indigo-950/10">
-              
+            <div className="glass-card p-8 min-h-[220px] flex flex-col justify-between relative overflow-hidden bg-linear-to-tr from-purple-500/5 to-indigo-500/5 dark:from-purple-950/10 dark:to-indigo-950/10">
+
               <div className="absolute top-0 right-0 w-24 h-24 bg-purple-500/5 rounded-bl-full pointer-events-none" />
-              
+
               {loading ? (
-                <div className="flex-grow flex flex-col items-center justify-center gap-3">
+                <div className="grow flex flex-col items-center justify-center gap-3">
                   <RefreshCw className="w-8 h-8 text-purple-600 animate-spin" />
                   <span className="text-xs text-slate-500">Gemini is writing daily wisdom for you...</span>
                 </div>
@@ -246,11 +242,10 @@ export default function QuoteGeneratorPage() {
                         <button
                           onClick={handleLike}
                           disabled={saved}
-                          className={`flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
-                            saved 
-                              ? 'bg-red-500/10 border-red-500/20 text-red-500 font-bold' 
-                              : 'bg-white dark:bg-slate-900 text-slate-500 border-slate-200 dark:border-slate-800 hover:text-red-500'
-                          }`}
+                          className={`flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${saved
+                            ? 'bg-red-500/10 border-red-500/20 text-red-500 font-bold'
+                            : 'bg-white dark:bg-slate-900 text-slate-500 border-slate-200 dark:border-slate-800 hover:text-red-500'
+                            }`}
                         >
                           <Heart className={`w-3.5 h-3.5 ${saved ? 'fill-red-500 text-red-500' : ''}`} />
                           <span>{saved ? 'Saved!' : 'Save Quote'}</span>
@@ -277,7 +272,7 @@ export default function QuoteGeneratorPage() {
                   </div>
                 </div>
               ) : (
-                <div className="flex-grow flex flex-col items-center justify-center text-center gap-2">
+                <div className="grow flex flex-col items-center justify-center text-center gap-2">
                   <Sparkles className="w-10 h-10 text-slate-300 dark:text-slate-700 animate-pulse" />
                   <span className="text-xs font-semibold text-slate-400">Configure parameters on the left and click generate.</span>
                 </div>
@@ -286,7 +281,7 @@ export default function QuoteGeneratorPage() {
 
             {/* Rewriter Segment */}
             {generatedQuote && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="glass-card p-6 flex flex-col gap-4 text-left"
@@ -304,16 +299,15 @@ export default function QuoteGeneratorPage() {
                     <button
                       key={style}
                       onClick={() => setSelectedStyle(style)}
-                      className={`px-3 py-1.5 text-xs rounded-lg border cursor-pointer transition-colors ${
-                        selectedStyle === style
-                          ? 'border-purple-600 bg-purple-500/10 text-purple-600 dark:text-purple-400 font-semibold'
-                          : 'border-slate-200/60 dark:border-slate-800/60 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-900/50'
-                      }`}
+                      className={`px-3 py-1.5 text-xs rounded-lg border cursor-pointer transition-colors ${selectedStyle === style
+                        ? 'border-purple-600 bg-purple-500/10 text-purple-600 dark:text-purple-400 font-semibold'
+                        : 'border-slate-200/60 dark:border-slate-800/60 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-900/50'
+                        }`}
                     >
                       {style}
                     </button>
                   ))}
-                  
+
                   <button
                     onClick={handleRewrite}
                     disabled={rewriting}
@@ -327,7 +321,7 @@ export default function QuoteGeneratorPage() {
                 {/* Rewriter Result */}
                 <AnimatePresence>
                   {rewrittenText && (
-                    <motion.div 
+                    <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
@@ -351,10 +345,8 @@ export default function QuoteGeneratorPage() {
           </div>
 
         </section>
+      </div>
+    </main>
 
-      </main>
-
-      <Footer />
-    </>
   );
 }
